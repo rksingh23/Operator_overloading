@@ -2,96 +2,110 @@
 #include "gtest/gtest.h"
 #include <vector>
 
-
-
-TEST(FindPrimeTest, HandlesPositiveNumberSeive) {
-  Solution solution;
-
-  int num=5;
-  std::vector<int> vect1{2,3,5};
-  std::vector<int> cmp;
-  for (auto n:solution.Prime_SieveOfEratosthenes(num)){
-    cmp.push_back (n);
-  }
-  ASSERT_EQ(cmp.size(), vect1.size()) << "Vectors x and y are of unequal length";
-  for (unsigned int i = 0; i < vect1.size(); ++i){
-    EXPECT_EQ(cmp[i],vect1[i]);
-  } 
+// Add your own tests in this file
+TEST(Q5_Student, TEST1) {
+  EXPECT_EQ(true, true);
 }
 
-TEST(FindPrimeTest, HandlesPositiveNumberRecursive) {
-  Solution solution;
-
-  int num=5;
-  std::vector<int> vect1{2,3,5};
-  std::vector<int> cmp;
-  for (auto n:solution.FindPrimeRecursive(num)){
-    cmp.push_back (n);
-  }
-  ASSERT_EQ(cmp.size(), vect1.size()) << "Vectors x and y are of unequal length";
-  for (unsigned int i = 0; i < vect1.size(); ++i){
-    EXPECT_EQ(cmp[i],vect1[i]);
-  } 
+TEST(Q5_Student, HandlesDefaultConstructor) {
+  float real =0;
+  float ima=0;
+  Complex s;
+  EXPECT_FLOAT_EQ (s.real,real);
+  EXPECT_FLOAT_EQ (s.ima,ima);
 }
 
-
-TEST(FindPrimeTest, HandlesNegativeNumberSeive) {
-  Solution solution;
-
-  int num=-1;
-  std::vector<int> vect1{-1};
-  std::vector<int> cmp;
-  for (auto n:solution.Prime_SieveOfEratosthenes(num)){
-    cmp.push_back (n);
-  }
-  ASSERT_EQ(cmp.size(), vect1.size()) << "Vectors x and y are of unequal length";
-  for (unsigned int i = 0; i < vect1.size(); ++i){
-    EXPECT_EQ(cmp[i],vect1[i]);
-  } 
+TEST(Q5_Student, HandlesParametrizedConstructor) {
+  float real =5;
+  float ima=7;
+  Complex s(real,ima);
+  EXPECT_FLOAT_EQ (s.real, real);
+  EXPECT_FLOAT_EQ (s.ima, ima);
 }
 
-TEST(FindPrimeTest, HandlesNegativeNumberRecursive) {
-  Solution solution;
-
-  int num=-1;
-  std::vector<int> vect1{-1};
-  std::vector<int> cmp;
-  for (auto n:solution.FindPrimeRecursive(num)){
-    cmp.push_back (n);
-  }
-  ASSERT_EQ(cmp.size(), vect1.size()) << "Vectors x and y are of unequal length";
-  for (unsigned int i = 0; i < vect1.size(); ++i){
-    EXPECT_EQ(cmp[i],vect1[i]);
-  } 
+TEST(Q5_Student, HandlesCopyConstructor) {
+  float real =5;
+  float ima=7;
+  Complex s(real,ima);
+  Complex d=s;
+  EXPECT_FLOAT_EQ (d.real, real);
+  EXPECT_FLOAT_EQ (d.ima, ima);
 }
 
-
-TEST(FindPrimeTest, HandlesZeroSeive) {
-  Solution solution;
-
-  int num=0;
-  std::vector<int> vect1{-1};
-  std::vector<int> cmp;
-  for (auto n:solution.Prime_SieveOfEratosthenes(num)){
-    cmp.push_back (n);
-  }
-  ASSERT_EQ(cmp.size(), vect1.size()) << "Vectors x and y are of unequal length";
-  for (unsigned int i = 0; i < vect1.size(); ++i){
-    EXPECT_EQ(cmp[i],vect1[i]);
-  } 
+TEST(Q5_Student, HandlesCopyOperator) {
+  float real =5;
+  float ima=7;
+  Complex s(real,ima);
+  Complex e;
+  e=s;
+  EXPECT_FLOAT_EQ (e.real, real);
+  EXPECT_FLOAT_EQ (e.ima, ima);
 }
 
-TEST(FindPrimeTest, HandlesZerorRecursive) {
-  Solution solution;
+TEST(Q5_Student, HandlesPostfixPlusAndMinusOperators) {
+  float real =5;
+  float ima=7;
 
-  int num=0;
-  std::vector<int> vect1{-1};
-  std::vector<int> cmp;
-  for (auto n:solution.FindPrimeRecursive(num)){
-    cmp.push_back (n);
-  }
-  ASSERT_EQ(cmp.size(), vect1.size()) << "Vectors x and y are of unequal length";
-  for (unsigned int i = 0; i < vect1.size(); ++i){
-    EXPECT_EQ(cmp[i],vect1[i]);
-  } 
+  Complex e(real,ima);
+
+  e.operator++();
+  real++;
+  EXPECT_FLOAT_EQ (e.real, real);
+  EXPECT_FLOAT_EQ (e.ima, ima);
+
+  e.operator--();
+  --real;
+
+  EXPECT_FLOAT_EQ (e.real, real);
+  EXPECT_FLOAT_EQ (e.ima, ima);
+}
+
+TEST(Q5_Student, HandlesMulOperators) {
+  float real =5;
+  float ima=7;
+  float mul =10.1;
+
+  Complex e(real,ima);
+  e.operator*(mul);
+  
+  EXPECT_FLOAT_EQ (e.real, (real*mul));
+  EXPECT_FLOAT_EQ (e.ima, (ima*mul));
+}
+
+TEST(Q5_Student, HandlesPlusEqualOperators1) {
+  float real =5;
+  float ima=7;
+  float add =10;
+
+  Complex e(real,ima);
+  e+=(add);
+  
+  EXPECT_FLOAT_EQ (e.real, (real+add));
+  EXPECT_FLOAT_EQ (e.ima, ima);
+}
+
+TEST(Q5_Student, HandlesPlusEqualOperators2) {
+  float real1 =1;
+  float ima1  =0;
+  Complex f(real1,ima1);
+  float real =5;
+  float ima=7;
+
+  Complex e(real,ima);
+  e+=(f);
+  
+  EXPECT_FLOAT_EQ (e.real, (real+real1));
+  EXPECT_FLOAT_EQ (e.ima, (ima+ima1));
+}
+
+TEST(Q5_Student, HandlesLessThanOperators) {
+  float real1 =1;
+  float ima1  =0;
+  Complex f(real1,ima1);
+  float real =5;
+  float ima=7;
+  Complex e(real,ima);
+  
+  EXPECT_FLOAT_EQ (f>e, false);
+  EXPECT_FLOAT_EQ (e>f, true);
 }

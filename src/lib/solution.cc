@@ -2,65 +2,75 @@
 #include <iostream>
 #include <bits/stdc++.h>
 
-
-std::vector<int> Solution::Prime_SieveOfEratosthenes(int &num) 
-{ 
-  std::vector<int> result;
-  std::vector<bool> visited(num+1,false); //Creates a boolean array visited, having size (o to n), all initialized as false.
-
-  if (num<=0)
-  {
-      return {-1};
-  }
-  else
-  {
-  for(int i=2;i<=num;i++)
-  {
-    if(!visited[i]) // if any number is not visited, it is a prime number
-    {
-      result.push_back(i); //add them to the result vector
-      for(int j=i+i; j<=num; j+=i)
-      {
-        visited[j]=true; //all the multiples of that number are non prime, hence invalidate them.
-      }
-    }
-  }
-  return result;
-  }
-}
-
-
-
-
-std::vector<int> Solution::FindPrimeRecursive(int &num)
+Complex::~Complex()
 {
-  std::vector<int> result;
-  if (num<=0)
-  {
-      return {-1};
-  }
-  else
-  {
-      for(int i=2;i<=num;i++)
-      {
-        Solution::globalChk = i/2;
-        if(isPrime(i))
-            result.push_back(i);
-      }
-  }
-  return result;
+std::cout<<"Destructor!"<<std::endl; 
+} 
+
+// implement a copy constructor.
+Complex::Complex(const Complex &p2)
+{
+    Complex::real=p2.real;
+    Complex::ima =p2.ima;
+    std::cout<<"Constructor!"<<std::endl; 
+}
+
+// implement a copy assignment operator.
+Complex& Complex::operator=(const Complex &p3)
+{
+    Complex::real=p3.real;
+    Complex::ima =p3.ima;
+    std::cout<<"Copy Constructor!"<<std::endl; 
+    return *this;
+}
+
+//q5_1 complex++
+Complex& Complex::operator ++()
+{
+    Complex::real++;
+    return *this;
 }
 
 
-bool Solution::isPrime(int &num){
-  if(globalChk==1){
-    return 1;
-  }else{
-    if(num%globalChk==0) {
-      return 0;
-    } else {
-      globalChk = globalChk-1;
-      isPrime(num);
-    }
-  }
+
+//q5_2 --complex
+Complex& Complex::operator --()
+{
+    --Complex::real;
+    return *this;
 }
+
+//q5_3 complex1 > complex2
+bool Complex::operator >(const Complex &p3) const
+{
+    return (((Complex::real>p3.real)&&(Complex::ima>p3.ima))?true:false);
+}
+
+
+
+//q5_4 complex * (an float number)
+Complex& Complex::operator *(const float &s)
+{
+    Complex::real=Complex::real*s;
+    Complex::ima =Complex::ima*s;
+    return *this;
+}
+
+
+//q5_5 complex1 += complex2
+Complex& Complex::operator +=(const Complex &p4)
+{
+    Complex::real=Complex::real+(p4.real);
+    Complex::ima =Complex::ima +(p4.ima);
+    return *this;
+}
+
+//q5_6 complex2 += (an float number)
+Complex& Complex::operator +=(const float &p5)
+{
+    Complex::real=Complex::real+p5;
+    //Complex::ima =Complex::ima +p5;
+    return *this;
+}
+
+

@@ -2,31 +2,41 @@
 #include <iostream>
 #include<vector>
 
-int main() {
-  Solution solution;
-  int num=5;
+int main() 
+{
+      float real =5;
+      float ima=7;
+      Complex s(real,ima);
+      Complex d=s;
+      Complex e;
+      e=s;
 
-  std::cout << "Recursive Prime result for "<<num<< std::endl;
-  for (auto n:solution.FindPrimeRecursive(num)){
-    std::cout<<n<<std::endl;
-  }
+      float real1 =1;
+      float ima1  =0;
+      Complex f(real1,ima1);
 
-  std::cout << "Seive Prime result for "<<num<< std::endl;
-  for (auto n:solution.Prime_SieveOfEratosthenes(num)){
-    std::cout<<n<<std::endl;
-  }
+      std::cout<<"copy = oper   ";
+      std::cout<<e.real<<" "<<e.ima<<std::endl;
+      //Complex g
+      e.operator++();
+      std::cout<<"++ operator   ";
+      std::cout<<e.real<<" "<<e.ima<<std::endl;
+      e.operator--();
+      std::cout<<"-- operator   ";
+      std::cout<<e.real<<" "<<e.ima<<std::endl;
+      e.operator*(4);
+      std::cout<<"* operator    ";
+      std::cout<<e.real<<" "<<e.ima<<std::endl;
+      e.operator+=(5.0);
+      std::cout<<"+= operator   ";
+      std::cout<<e.real<<" "<<e.ima<<std::endl;
+      std::cout<<e.real<<" "<<e.ima<<" + "<<f.real<<" "<<f.ima<<std::endl;
+      e+=(f);
+      std::cout<<"+= operator   ";
+      std::cout<<e.real<<" "<<e.ima<<std::endl;
 
-  num=-1;
-
-  std::cout << "Recursive Prime result for "<<num<< std::endl;
-  for (auto n:solution.FindPrimeRecursive(num)){
-    std::cout<<n<<std::endl;
-  }
-
-  std::cout << "Seive Prime result for "<<num<< std::endl;
-  for (auto n:solution.Prime_SieveOfEratosthenes(num)){
-    std::cout<<n<<std::endl;
-  }
+      std::cout<<"> operator    ";
+      std::cout<<((e>f)?"true":"false")<<std::endl;
 
   return 0;
 }
